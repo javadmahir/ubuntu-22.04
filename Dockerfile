@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DISPLAY=:1
 ENV PORT=6080
 
 RUN apt-get update && \
@@ -12,6 +13,8 @@ RUN apt-get update && \
     x11-utils \
     xauth \
     openssl \
+    curl \
+    wget \
     ca-certificates && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -20,6 +23,8 @@ RUN mkdir -p /root/.vnc
 
 RUN cat > /root/.vnc/xstartup << 'EOF'
 #!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
 exec xterm
 EOF
 
@@ -36,12 +41,8 @@ vncserver :1 \
 -SecurityTypes None \
 -localhost no \
 --I-KNOW-THIS-IS-INSECURE && \
-sleep 3 && \
-echo "========== VNC LOG ==========" && \
-cat /root/.vnc/*.log && \
-echo "=============================" && \
 websockify \
 --verbose \
 --web=/usr/share/novnc \
-${PORT:-6080} \
+0.0.0.0:${PORT:-6080} \
 localhost:5901'
