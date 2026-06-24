@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y curl wget git sudo nano vim nodejs npm 
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
+RUN npm install -g freebuff
+
 EXPOSE 10000
 
 CMD ["code-server","--bind-addr","0.0.0.0:10000","--auth","password","/root"]
