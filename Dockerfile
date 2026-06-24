@@ -9,4 +9,5 @@ RUN apt-get update && \
     wget -O /usr/local/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && \
     chmod +x /usr/local/bin/ttyd
 
-CMD bash -c "ttyd --writable -p $PORT bash"
+# CMD bash -c "ttyd --writable -p $PORT bash"
+CMD bash -c "ttyd -c mj:mj@123 --writable -p $PORT bash"
