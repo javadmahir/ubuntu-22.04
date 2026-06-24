@@ -4,8 +4,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PORT=10000
 
 RUN apt-get update && \
-    apt-get install -y curl wget git nano ca-certificates nodejs npm && \
-    npm install -g freebuff && \
-    apt-get clean
+    apt-get install -y nodejs npm
 
-CMD ["bash", "-c", "while true; do sleep 3600; done"]
+CMD ["bash","-c","python3 -m http.server $PORT"]
