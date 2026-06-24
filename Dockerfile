@@ -14,14 +14,10 @@ vim
 nodejs 
 npm 
 python3 
-python3-pip 
-&& rm -rf /var/lib/apt/lists/*
-
-# Install code-server
+python3-pip && 
+rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
-
-# Optional: Install Freebuff
 
 RUN npm install -g freebuff || true
 
